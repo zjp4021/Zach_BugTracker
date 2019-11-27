@@ -1,0 +1,76 @@
+﻿@model IEnumerable<Zach_BugTracker.Models.ManageRolesViewModel>
+@{
+    ViewBag.Title = "ManageRoles";
+    
+}
+
+
+<style>
+    .cntrlWide{
+        width: 100%
+   
+    }
+
+
+
+</style>
+
+<h2>ManageRoles</h2>
+
+<div class="row">
+    <div class="col-md-6">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="row">
+                <div class="col-md-12">
+                    @Html.ListBox("UserIds", null, new { @class = "cntrlWide" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    @Html.DropDownList("Role", null, "--Select Role--", new { @class = "cntrlWide" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <button type="submit" class="btn btn-primary cntrlWide">Submit</button>
+                </div>
+            </div>
+        }
+
+    </div>
+</div>
+
+<div>
+    <div class="col-md-6">
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayName("User Name")
+                </th>
+                <th>
+                    @Html.DisplayName("Role")
+                </th>
+            </tr>
+
+            @foreach (var user in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(model => user.UserName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => user.RoleName)
+                    </td>
+                </tr>
+            }
+
+        </table>
+
+
+    </div>
+</div>
+
+

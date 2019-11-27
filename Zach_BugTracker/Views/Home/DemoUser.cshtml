@@ -1,0 +1,198 @@
+﻿@{
+    Layout = null;
+}
+
+<!doctype html>
+<html class="no-js" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Demo Login | Zach Bug Tracker</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- favicon
+    ============================================ -->
+    <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico">
+    <!-- Google Fonts
+        ============================================ -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i,800" rel="stylesheet">
+    <!-- Bootstrap CSS
+        ============================================ -->
+    <link rel="stylesheet" href="~/Content/bootstrap.min.css">
+    <!-- Bootstrap CSS
+        ============================================ -->
+    <link rel="stylesheet" href="~/Content/font-awesome.min.css">
+    <!-- adminpro icon CSS
+        ============================================ -->
+    <link rel="stylesheet" href="~/Content/adminpro-custon-icon.css">
+    <!-- meanmenu icon CSS
+        ============================================ -->
+    <link rel="stylesheet" href="~/Content/meanmenu.min.css">
+    <!-- mCustomScrollbar CSS
+        ============================================ -->
+    <link rel="stylesheet" href="~/Content/jquery.mCustomScrollbar.min.css">
+    <!-- animate CSS
+        ============================================ -->
+    <link rel="stylesheet" href="~/Content/animate.css">
+    <!-- normalize CSS
+        ============================================ -->
+    <link rel="stylesheet" href="~/Content/normalize.css">
+    <!-- form CSS
+        ============================================ -->
+    <link rel="stylesheet" href="~/Content/form.css">
+    <!-- style CSS
+        ============================================ -->
+    <link href="~/Content/style.css" rel="stylesheet" />
+    <!-- responsive CSS
+        ============================================ -->
+    <link rel="stylesheet" href="~/Content/responsive.css">
+
+    <!-- Custom CSS
+    =================================================-->
+    <link href="~/Content/Custom.css" rel="stylesheet" />
+
+    <!-- modernizr JS
+        ============================================ -->
+    <script src="~/Scripts/modernizr-2.8.3.min.js"></script>
+</head>
+
+
+
+<body style="background-size:cover; background-image: url('/Images/Cosmo.jpg')">
+
+    @*[if lt IE 8]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]*@
+    <!--Header top area start-->
+    <div class="wrapper-pro">
+        @*login Start*@
+        <div class="content-inner-all">
+            <div class="login-form-area mg-t-30 mg-b-40">
+                <div class="login-form-area">
+                    <div class="container-fluid">
+
+                        <div class="row">
+                            <div class="col-lg-3">
+                                @using (Html.BeginForm("DemoLoginAsync", "Account", FormMethod.Post))
+                                {
+                                    @Html.AntiForgeryToken()
+
+                                    @Html.Hidden("emailKey", "DemoAdminEmail")
+
+                                    <section class="panel">
+                                        <header class="panel-heading bg-primary">
+                                            <div class="panel-heading-icon bg-primary mt-sm">
+                                                <img src="~/Avatars/ProjectManager-Female.png" />
+
+                                            </div>
+                                        </header>
+                                        <div class="panel-body">
+                                            <button type="submit" class="btn btn-sm btn-primary">Demo Admin Login</button>
+                                        </div>
+                                    </section>
+                                }
+                            </div>
+
+                            <div class="col-lg-3">
+                                @using (Html.BeginForm("DemoLoginAsync", "Account", FormMethod.Post))
+                                {
+                                    @Html.AntiForgeryToken()
+
+                                    @Html.Hidden("emailKey", "DemoPMEmail")
+
+                                    <section class="panel">
+                                        <header class="panel-heading bg-primary">
+                                            <div class="panel-heading-icon bg-primary mt-sm">
+                                                <img src="~/Avatars/Admin.png" />
+                                            </div>
+                                        </header>
+                                        <div class="panel-body">
+                                            <button type="submit" class="btn btn-sm btn-primary">Demo PM Login</button>
+                                        </div>
+                                    </section>
+                                }
+
+                            </div>
+
+                            <div class="col-lg-3">
+                                @using (Html.BeginForm("DemoLoginAsync", "Account", FormMethod.Post))
+                                {
+                                    @Html.AntiForgeryToken()
+
+                                    @Html.Hidden("emailKey", "DemoDeveloperEmail")
+
+                                    <section class="panel">
+                                        <header class="panel-heading bg-primary">
+                                            <div class="panel-heading-icon bg-primary mt-sm">
+                                                <img src="~/Avatars/Submitter-Male.png" />
+                                            </div>
+                                        </header>
+                                        <div class="panel-body">
+                                            <button type="submit" class="btn btn-sm btn-primary">Demo Developer Login</button>
+                                        </div>
+                                    </section>
+                                }
+
+                            </div>
+
+                            <div class="col-lg-3">
+                                @using (Html.BeginForm("DemoLoginAsync", "Account", FormMethod.Post))
+                                {
+                                    @Html.AntiForgeryToken()
+
+                                    @Html.Hidden("emailKey", "DemoSubmitterEmail")
+
+                                    <section class="panel">
+                                        <header class="panel-heading bg-primary">
+                                            <div class="panel-heading-icon bg-primary mt-sm">
+                                                <img src="~/Avatars/Primary.png" />
+                                            </div>
+                                        </header>
+                                        <div class="panel-body">
+                                            <button type="submit" class="btn btn-sm btn-primary">Demo Submitter Login</button>
+                                        </div>
+                                    </section>
+                                }
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- jquery
+    ============================================ -->
+    <script src="~/Scripts/jquery-1.11.3.min.js"></script>
+    <!-- bootstrap JS
+    ============================================ -->
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <!-- meanmenu JS
+    ============================================ -->
+    <script src="~/Scripts/jquery.meanmenu.js"></script>
+    <!-- mCustomScrollbar JS
+    ============================================ -->
+    <script src="~/Scripts/jquery.mCustomScrollbar.concat.min.js"></script>
+    <!-- sticky JS
+    ============================================ -->
+    <script src="~/Scripts/jquery.sticky.js"></script>
+    <!-- scrollUp JS
+    ============================================ -->
+    <script src="~/Scripts/jquery.scrollUp.min.js"></script>
+    <!-- form validate JS
+    ============================================ -->
+    <script src="~/Scripts/jquery.form.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/form-active.js"></script>
+    <!-- main JS
+    ============================================ -->
+    <script src="~/Scripts/main.js"></script>
+
+</body>
+
+</html>

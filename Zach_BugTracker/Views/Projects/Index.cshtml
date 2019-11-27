@@ -1,0 +1,108 @@
+﻿@model IEnumerable<Zach_BugTracker.Models.Project>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+
+<br />
+
+
+<div class="admin-dashone-data-table-area mg-b-15">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="sparkline8-list shadow-reset">
+                    <div class="sparkline8-hd">
+                        <div class="main-sparkline8-hd">
+                            <h1>My Projects</h1>
+                            <div class="sparkline8-outline-icon">
+                                <span class="sparkline8-collapse-link"><i class="fa fa-chevron-up"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="sparkline8-graph">
+                        <div class="datatable-dashv1-list custom-datatable-overright">
+                         
+                            <table id="table" data-toggle="table" data-pagination="true" data-search="true" data-show-columns="true" data-show-pagination-switch="true" data-show-refresh="true" data-key-events="true" data-show-toggle="true" data-resizable="true" data-cookie="true" data-cookie-id-table="saveId" data-show-export="true" data-click-to-select="true" data-toolbar="#toolbar">
+                                <thead>
+                                    <tr>
+                                        <th data-field="id">@Html.DisplayNameFor(model => model.Id)</th>
+                                        <th data-field="status">@Html.DisplayNameFor(model => model.ProjectName)</th>
+                                        <th>@Html.DisplayNameFor(model => model.Description)</th>
+                                        <th> @Html.DisplayNameFor(model => model.Created)</th>
+                                        <th> @Html.DisplayNameFor(model => model.Updated)</th>
+                                        
+                                        <th data-field="action">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!--ForEach goes here-->
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            @*<td></td>*@
+                                            <td>@Html.DisplayFor(modelItem => item.Id)</td>
+                                            <td>
+                                                <div class="btn-group project-list-ad">
+                                                    <button class="btn btn-white btn-xs"> @Html.DisplayFor(modelItem => item.ProjectName)</button>
+                                                </div>
+                                            </td>
+                                            <td> @Html.DisplayFor(modelItem => item.Description)</td> 
+                                            <td> @Html.DisplayFor(modelItem => item.Created)</td>
+                                            <td> @Html.DisplayFor(modelItem => item.Updated)</td>
+                                           
+                                            <td>
+                                                <div class="btn-group project-list-action">
+
+                                                    <button class="btn btn-white btn-action btn-xs"><i class="fa fa-folder"></i>  @Html.ActionLink("Details", "Details", new { id = item.Id })</button>
+
+
+                                                    @if (User.IsInRole("Admin") | User.IsInRole("Project_Manager") | (User.IsInRole("DemoAdmin") | User.IsInRole("DemoPM")))
+                                                    {
+                                                        <button class="btn btn-white btn-action btn-xs"><i class="fa fa-pencil"></i>  @Html.ActionLink("Edit", "Edit", new { id = item.Id }) </button>
+                                                    }
+
+
+                                                    @if (User.IsInRole("Admin"))
+                                                    {
+                                                        <button class="btn btn-white btn-action btn-xs"><i class="fa fa-check"></i> @Html.ActionLink("Manage Project Users", "ManageProjectUsers", "Admin", new { id = item.Id }, null) </button>
+                                                    }
+
+                                                    @if (User.IsInRole("Submitter"))
+                                                    {
+                                                        <button class="btn btn-white btn-action btn-xs"><i class="fa fa-check"></i> @Html.ActionLink("Create Ticket", "Create", "Tickets", new { projectId = item.Id }, null) </button>
+                                                    }
+
+
+                                                </div>
+                                            </td>
+                                        </tr>
+
+                                    }
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section scripts{
+    <script>
+        var message = '@TempData["Message"]';
+        if (message != '')
+        {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops!',
+                text: message
+            })
+        };
+    </script>
+
+}
+

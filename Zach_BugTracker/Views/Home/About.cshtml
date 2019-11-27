@@ -1,0 +1,124 @@
+﻿@model Zach_BugTracker.Models.LoginRegisterViewModel
+
+
+@using Zach_BugTracker.Helpers
+@using Microsoft.AspNet.Identity
+@{
+    var roleHelper = new RoleHelper();
+    var UserHelper = new UserHelper();
+}
+
+
+@{
+    ViewBag.Title = "About";
+
+}
+
+<div class="container">
+    <div class="widgets-personal-info-area">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-3"></div>
+                <div class="col-lg-6">
+                    <div class="personal-info-wrap shadow-reset">
+                        <div class="widget-head-info-box">
+                            <div class="persoanl-widget-hd">
+                                <h2>@UserHelper.GetFullName()</h2>
+                                <br />
+
+                                <p>@roleHelper.ListUserRoles(User.Identity.GetUserId()).FirstOrDefault()</p>
+                            </div>
+                            <img src="@UserHelper.GetAvatarPath()" style="width:100px;height:100px" class="img-circle circle-border m-b-md" alt="">
+
+                            <br/>
+
+                            <div class="col-lg-12" align="center">
+                                <p>@UserHelper.GetEmail()</p>
+                            </div>
+
+                        </div>
+                   
+                        <div class="widget-text-box">
+                            <div class="row">
+                                <div class="col-lg-12" align="center">
+                                    <span><strong>Update User Info Below</strong></span>
+                                </div>
+                            </div>
+                            
+                            <br/>
+
+
+                            @using (Html.BeginForm())
+                            {
+                                @Html.AntiForgeryToken()
+
+                                <div class="form-horizontal">
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="login-input-head" align="center">
+                                                <p>First Name</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6" align="center">
+                                            <div class="login-input-area">
+                                                @Html.TextBoxFor(m => m.RegisterVM.FirstName, new { @class = "login-input-area", placeholder = "First Name" })
+                                                <i class="fa fa-user login-user"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="login-input-head" align="center">
+                                                <p>Last Name</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6" align="center">
+                                            <div class="login-input-area">
+                                                @Html.TextBoxFor(m => m.RegisterVM.LastName, new { @class = "login-input-area", placeholder = "Last Name" })
+                                                <i class="fa fa-user login-user"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="login-input-head" align="center">
+                                                <p>Email Address</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6" align="center">
+                                            <div class="login-input-area">
+                                                @Html.TextBoxFor(m => m.RegisterVM.Email, new { @class = "login-input-area", placeholder = "Email Address" })
+                                                <i class="fa fa-envelope login-user" aria-hidden="true"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="login-button-pro" align="center">
+                                            <button type="submit" class="login-button btn-success">Save</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            }
+                        </div>
+
+
+                    </div>
+                        <div class="col-lg-3"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+

@@ -1,0 +1,84 @@
+﻿@model IEnumerable<Zach_BugTracker.Models.TicketAttachments>
+@using Zach_BugTracker.Helpers
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<h2>Ticket Attachments</h2>
+
+<br/>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+<div class="container">
+    
+    <table class="table" id="demoTable">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayName("File Type")
+                </th>
+                <th>
+                    @Html.DisplayName("Submitter")
+                </th>
+                <th>
+                    @Html.DisplayName("Created By")
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Description)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Created)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        <a href="@item.FilePath" target="_blank">
+                            <img src="@AttachmentHelper.GetIcon(item.FilePath)" style="width: 40px;" />
+                        </a>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Ticket.Submitter.FullName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.User.FullName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td> 
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Created)
+                    </td>
+                    <td>
+                        @*@Html.ActionLink("Edit", "Edit", new { id = item.Id }) |*@
+                        @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>
+
+
+@*<td>
+    @Html.DisplayFor(modelItem => item.Ticket.SubmitterId)
+</td>
+<td>
+    @Html.DisplayFor(modelItem => item.User.FirstName)
+</td>
+
+<td>
+    @Html.DisplayFor(modelItem => item.Created)
+</td>*@

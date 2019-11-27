@@ -1,0 +1,43 @@
+﻿@model Zach_BugTracker.Models.Ticket
+        
+@{
+    ViewBag.Title = "Edit"; 
+}
+
+<h2 align="center"> Assign Ticket </h2> 
+
+<div class="container">
+    @using(Html.BeginForm("AssignTicket", "Tickets", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken() 
+    
+        <div class = "form-horizontal">
+            <h4> Ticket </h4>
+            <hr /> 
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.Id)
+            @Html.HiddenFor(model => model.ProjectId)
+            <div class = "form-group"> 
+                @Html.LabelFor(model => model.AssignedToUserId, "Assign Developer", new { @class = "control-label col-md-2" }) 
+                <div class = "col-md-10"> 
+                    @Html.DropDownList("AssignedToUserId", null, "-- Select Developer --", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.AssignedToUserId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class = "form-group">
+                <div class = "col-md-offset-2 col-md-10">
+                    <input type = "submit" value = "Save" class="btn btn-success"/>
+                </div>
+            </div>
+        </div>
+    }
+
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+</div>
+
+
+@section Scripts { 
+    @Scripts.Render("~/bundles/jqueryval")
+}
