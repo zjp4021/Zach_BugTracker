@@ -63,6 +63,18 @@ namespace Zach_BugTracker.Helpers
             return "User";
         }
 
+        public string GetFullName(string Id)
+        {
+            if (IsAuthenticated)
+            {
+                
+                var user = db.Users.Find(Id);
+
+                return user.FullName;
+            }
+            return "User";
+        }
+
         public string GetDisplayName()
         {
             if (IsAuthenticated)

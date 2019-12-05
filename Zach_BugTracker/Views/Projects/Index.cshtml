@@ -1,6 +1,10 @@
 ﻿@model IEnumerable<Zach_BugTracker.Models.Project>
+@using Zach_BugTracker.Helpers
+
 
 @{
+    var projectHelper = new ProjectsHelper();
+    var userHelper = new UserHelper();
     ViewBag.Title = "Index";
 }
 
@@ -32,53 +36,53 @@
                                         <th data-field="status">@Html.DisplayNameFor(model => model.ProjectName)</th>
                                         <th>@Html.DisplayNameFor(model => model.Description)</th>
                                         <th> @Html.DisplayNameFor(model => model.Created)</th>
-                                        <th> @Html.DisplayNameFor(model => model.Updated)</th>
-                                        
-                                        <th data-field="action">Action</th>
+                                        <th> @Html.DisplayName("Project Manager")</th>
+
+
+                                        <th data-field="task">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <!--ForEach goes here-->
-                                    @foreach (var item in Model)
+                                    @foreach (var item in Model.OrderByDescending(c => c.Created))
                                     {
-                                        <tr>
-                                            @*<td></td>*@
-                                            <td>@Html.DisplayFor(modelItem => item.Id)</td>
-                                            <td>
-                                                <div class="btn-group project-list-ad">
-                                                    <button class="btn btn-white btn-xs"> @Html.DisplayFor(modelItem => item.ProjectName)</button>
-                                                </div>
-                                            </td>
-                                            <td> @Html.DisplayFor(modelItem => item.Description)</td> 
-                                            <td> @Html.DisplayFor(modelItem => item.Created)</td>
-                                            <td> @Html.DisplayFor(modelItem => item.Updated)</td>
-                                           
-                                            <td>
-                                                <div class="btn-group project-list-action">
-
-                                                    <button class="btn btn-white btn-action btn-xs"><i class="fa fa-folder"></i>  @Html.ActionLink("Details", "Details", new { id = item.Id })</button>
+                                    <tr>
+                                        <td>@Html.DisplayFor(modelItem => item.Id)</td>
+                                        <td>
+                                            <div class="btn-group project-list-ad">
+                                                <button class="btn btn-white btn-xs"> @Html.DisplayFor(modelItem => item.ProjectName)</button>
+                                            </div>
+                                        </td>
+                                        <td> @Html.DisplayFor(modelItem => item.Description)</td>
+                                        <td> @Html.DisplayFor(modelItem => item.Created)</td>
+                                        <td> @projectHelper.ListUsersOnProjectInRole(item.Id, "Project_Manager")</td>
 
 
-                                                    @if (User.IsInRole("Admin") | User.IsInRole("Project_Manager") | (User.IsInRole("DemoAdmin") | User.IsInRole("DemoPM")))
-                                                    {
-                                                        <button class="btn btn-white btn-action btn-xs"><i class="fa fa-pencil"></i>  @Html.ActionLink("Edit", "Edit", new { id = item.Id }) </button>
-                                                    }
+                                        <td>
+                                            <div class="btn-group project-list-action">
+
+                                                @*@if (User.IsInRole("Admin") | User.IsInRole("Project_Manager") | (User.IsInRole("DemoAdmin") | User.IsInRole("DemoPM")))
+                {
+                    <button class="btn btn-white btn-action btn-xs"><i class="fa fa-pencil"></i>  @Html.ActionLink("Edit", "Edit", new { id = item.Id }) </button>
+                }*@
+
+                                                <button class="btn btn-white btn-action btn-xs"><i class="fa fa-folder"></i>  @Html.ActionLink("Details", "Details", new { id = item.Id })</button>
 
 
-                                                    @if (User.IsInRole("Admin"))
-                                                    {
-                                                        <button class="btn btn-white btn-action btn-xs"><i class="fa fa-check"></i> @Html.ActionLink("Manage Project Users", "ManageProjectUsers", "Admin", new { id = item.Id }, null) </button>
-                                                    }
+                                                @if (User.IsInRole("Admin"))
+                                                {
+                                                    <button class="btn btn-white btn-action btn-xs"><i class="fa fa-check"></i> @Html.ActionLink("Manage Project Users", "ManageProjectUsers", "Admin", new { id = item.Id }, null) </button>
+                                                }
 
-                                                    @if (User.IsInRole("Submitter"))
-                                                    {
-                                                        <button class="btn btn-white btn-action btn-xs"><i class="fa fa-check"></i> @Html.ActionLink("Create Ticket", "Create", "Tickets", new { projectId = item.Id }, null) </button>
-                                                    }
+                                                @if (User.IsInRole("Submitter"))
+                                                {
+                                                    <button class="btn btn-white btn-action btn-xs"><i class="fa fa-check"></i> @Html.ActionLink("Create Ticket", "Create", "Tickets", new { projectId = item.Id }, null) </button>
+                                                }
 
 
-                                                </div>
-                                            </td>
-                                        </tr>
+                                            </div>
+                                        </td>
+                                    </tr>
 
                                     }
                             </table>

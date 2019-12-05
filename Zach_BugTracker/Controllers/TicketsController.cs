@@ -45,8 +45,9 @@ namespace Zach_BugTracker.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> AssignTicket(Ticket model)
         {
-            var userDemo = db.Users.Find(User.Identity.GetUserId());
-            if (userDemo.IsUserDemo())
+            var userId = User.Identity.GetUserId();
+           
+            if (roleHelper.ListUserRoles(userId).FirstOrDefault().ToLower().Contains("demo"))
             {
                 return RedirectToAction("Index");
             }
@@ -141,8 +142,9 @@ namespace Zach_BugTracker.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ProjectId,TicketTypeId,TicketPriorityId,TicketStatusId,SubmitterId,Title,Description")] Ticket ticket)
         {
-            var userDemo = db.Users.Find(User.Identity.GetUserId());
-            if (userDemo.IsUserDemo())
+            var userId = User.Identity.GetUserId();
+
+            if (roleHelper.ListUserRoles(userId).FirstOrDefault().ToLower().Contains("demo"))
             {
                 return RedirectToAction("Index");
             }

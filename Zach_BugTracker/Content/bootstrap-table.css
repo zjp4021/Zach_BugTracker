@@ -235,6 +235,7 @@
 }
 
 .table th, .table td {
+    word-break:break-word;
     vertical-align: middle;
     box-sizing: border-box;
 }

@@ -103,22 +103,25 @@ namespace Zach_BugTracker.Controllers
         // GET: Projects/Details/5
         public ActionResult Details(int? id)
         {
-            Project project = new Project
-            {
-                Users = projectsHelper.UsersOnProject((int)id).ToList(),
-                Tickets = db.Projects.Find((int)id).Tickets.ToList(),
-                Description = db.Projects.Find((int)id).Description,
-                ProjectName = db.Projects.Find((int)id).ProjectName,
-                Created = db.Projects.Find((int)id).Created,
-                Updated = db.Projects.Find((int)id).Updated,
-                Id = (int)id
-            };
+            //Project project = new Project
+            //{
+            //    Users = projectsHelper.UsersOnProject((int)id).ToList(),
+            //    Tickets = db.Projects.Find((int)id).Tickets.ToList(),
+            //    Description = db.Projects.Find((int)id).Description,
+            //    ProjectName = db.Projects.Find((int)id).ProjectName,
+            //    Created = db.Projects.Find((int)id).Created,
+            //    Updated = db.Projects.Find((int)id).Updated,
+            //    ProjectManagerId = db.Projects.Find((int)id).ProjectManager.Id, 
+            //    Id = (int)id
+            //};
 
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-          
+
+            var project = db.Projects.Find(id);
+
             if (project == null)
             {
                 return HttpNotFound();
@@ -140,12 +143,13 @@ namespace Zach_BugTracker.Controllers
         [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Description")] Project project)
+        public ActionResult Create([Bind(Include = "Id,ProjectName,Description,ProjectManager")] Project project)
         {
             if (ModelState.IsValid)
             {
                 //project.Submitter = User.Identity.GetUserId();
                 project.Created = DateTime.Now;
+                
                 db.Projects.Add(project);
                 db.SaveChanges();
                 return RedirectToAction("Index");

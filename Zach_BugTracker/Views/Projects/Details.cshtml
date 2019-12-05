@@ -1,52 +1,261 @@
-﻿@model Zach_BugTracker.Models.Project
+﻿@using Zach_BugTracker.Helpers
+@using Microsoft.AspNet.Identity
+@model Zach_BugTracker.Models.Project
 
 @{
+    var projectsHelper = new ProjectsHelper();
+    var UserHelper = new UserHelper();
+    var roleHelper = new RoleHelper();
+
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
-
-<div>
-    <h4>Project</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.ProjectName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ProjectName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Description)
-        </dd>
 
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Created)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Created)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Updated)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Updated)
-        </dd>
+<div class="project-details-area mg-b-15">
 
 
-    </dl>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                @*<div class="project-details-wrap shadow-reset">*@
+                <div class="sparkline7-list shadow-reset mg-t-30">
+                    <!--THIS LINE OF CODE IS WHAT ALLOWS TABLE TO COLLAPSE-->
+
+                    <div class="sparkline7-hd">
+                        <div class="main-spark7-hd">
+                            <h1>Project Details</h1>
+                            <div class="sparkline7-outline-icon">
+                                <span class="sparkline7-collapse-link"><i class="fa fa-chevron-up"></i></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="sparkline7-graph project-details-price-hd">
+                        <!--MUST ALSO HAVE THIS LINE OF CODE SO THAT BOTTOM HALF WILL COLLAPSE-->
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <div class="project-details-mg">
+                                    <div class="row">
+                                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                            <div class="project-details-st">
+                                                <span><strong>@Html.DisplayName("Project Name:")</strong></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                            <div class="project-details-dt">
+                                                <span> @Html.DisplayFor(model => model.ProjectName)</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="project-details-mg">
+                                    <div class="row">
+                                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                            <div class="project-details-st">
+                                                <span><strong>@Html.DisplayName("Description:")</strong></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                            <div class="project-details-dt">
+                                                <span> @Html.DisplayFor(model => model.Description)</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="project-details-mg">
+                                    <div class="row">
+                                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                            <div class="project-details-st">
+                                                <span><strong>@Html.DisplayName("Created:")</strong></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                            <div class="project-details-dt">
+                                                <span> @Html.DisplayFor(model => model.Created)</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="project-details-mg">
+                                    <div class="row">
+                                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                            <div class="project-details-st">
+                                                <span><strong>@Html.DisplayName("Updated:")</strong></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                            <div class="project-details-dt">
+                                                <span> @Html.DisplayFor(model => model.Updated)</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <div class="project-details-mg">
+                                    <div class="row">
+                                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                            <div class="project-details-st">
+                                                <span><strong>@Html.DisplayName("Project Manager:")</strong></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                            <div class="project-details-dt">
+
+                                                <span> @projectsHelper.ListUsersOnProjectInRole(Model.Id, "Project_Manager").First().FullName </span>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="project-details-mg">
+                                    <div class="row">
+                                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                            <div class="project-details-st">
+                                                <span><strong>@Html.DisplayName("Developers:")</strong></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                            <div class="project-details-dt">
+
+                                                @foreach (var user in Model.Users)
+                                                {
+                                                    <span>@user.FullName</span> <br />
+                                                }
+
+                                                @*<span> @Html.DisplayFor(model => model.Developer)</span>*@
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="project-details-mg">
+                                    <div class="row">
+                                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                            <div class="project-details-st">
+                                                <span><strong>@Html.DisplayName("Submitters:")</strong></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                            <div class="project-details-dt">
+
+                                                @*@foreach (var user in Model.Users)
+                                                {
+                                                    <span>@user.FullName</span> <br />
+                                                }*@
+
+                                                <span> @projectsHelper.ListUsersOnProjectInRole(Model.Id, "Submitter").First().FullName </span>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>                       
+                            <div class="row">
+                                <div class="col-lg-2">
+                                    <div class="project-pregress-details">
+                                        <span><strong>Completed:</strong></span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-10">
+                                    <div class="skill-content-3 project-details-progress">
+                                        <div class="skill">
+                                            <div class="progress">
+                                                <div class="progress-bar wow fadeInLeft" data-progress="95%" style="width: 95%;" data-wow-duration="1.5s" data-wow-delay="1.2s">
+                                                    <span>95%</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-lg-1"></div>
+                                    <div class="col-lg-10">
+                                        <div class="project-details-tab">
+                                            <ul class="nav nav-tabs res-pd-less-sm">
+                                                <li>
+                                                    <a data-toggle="tab" href="#menu1">Project Tickets</a>
+                                                </li>
+                                            </ul>
+                                            <div class="tab-content res-tab-content-project">
+                                                <div id="menu1" class="tab-pane fade in active animated slideInUp">
+                                                    <div class="project-details-completeness">
+                                                        <table class="table table-striped">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>@Html.DisplayName("Ticket Id")</th>
+                                                                    <th>@Html.DisplayName("Title")</th>
+                                                                    <th>@Html.DisplayName("Status")</th>
+                                                                    <th>@Html.DisplayName("Priority")</th>
+                                                                    <th>@Html.DisplayName("Type")</th>
+                                                                    <th>@Html.DisplayName("Created")</th>
+                                                                    <th>@Html.DisplayName("Updated")</th>
+                                                                    <th></th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+
+                                                                @foreach (var item in Model.Tickets)
+                                                                {
+                                                                    <tr>
+                                                                        <td>
+                                                                            @Html.DisplayFor(modelItem => item.Id)
+                                                                        </td>
+                                                                        <td>
+                                                                            @Html.DisplayFor(modelItem => item.Title)
+                                                                        </td>
+                                                                        <td>
+                                                                            @Html.DisplayFor(modelItem => item.TicketStatus.StatusName)
+                                                                        </td>
+                                                                        <td>
+                                                                            @Html.DisplayFor(modelItem => item.TicketPriority.PriorityName)
+                                                                        </td>
+                                                                        <td>
+                                                                            @Html.DisplayFor(modelItem => item.TicketType.TypeName)
+                                                                        </td>
+                                                                        <td>
+                                                                            @Html.DisplayFor(modelItem => item.Created)
+                                                                        </td>
+                                                                        <td>
+                                                                            @Html.DisplayFor(modelItem => item.Updated)
+                                                                        </td>
+
+
+                                                                    </tr>
+                                                                }
+
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
+<br/>
+
+<div class="row" align="center">
+    <h4 style="font:oblique">
+        @*@Html.ActionLink("Edit", "Edit", new { id = Model.Id })*@ |
+        @Html.ActionLink("Return To My Projects", "Index") |
+        @*@Html.ActionLink("Add Attachment", "TicketAttachments", new { id = Model.Id }, null)*@
+    </h4>
+</div>
+
+
+
+

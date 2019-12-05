@@ -15,111 +15,272 @@
 </style>
 
 
-@*<h2 align="center">Manage Project Users</h2>*@
-
-<div class="container">
-
-    <h2 align="center">Manage Project Users</h2>
-
-    <div class="row">
-        <div class="col-lg-12"></div>
-    </div>
-    <div class="row">
-        <div class="col-lg-12"></div>
-    </div>
 
 
-    <div class="row">
-        @using (Html.BeginForm())
-        {
-            @Html.AntiForgeryToken()
 
 
-            <h3>Projects List</h3>
-            <div class="col-md-4">
-                @Html.ListBox("Projects", null, new { @class = "form-control" })
-            </div>
-
-            <div class="col-md-3">
-                <button type="submit" align="center" class="btn btn-primary btn-lg">Assign</button>
-            </div>
+<!--New Edit Table=========================================================================================================================================-->
 
 
-            <div class="col-md-5">
-                @if (User.IsInRole("Admin"))
-                {
-                    <div class="row">
-                        <div class="col-md-12">
-                            <h3>Project Manager</h3>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+
+
+    <div class="advanced-form-area mg-b-15">
+        <div class="container-fluid">
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="sparkline10-list shadow-reset mg-t-30">
+                        <div class="sparkline10-hd">
+                            <div class="main-sparkline10-hd">
+                                <h1>Manage Users On Projects</h1>
+                                <div class="sparkline10-outline-icon">
+                                    <span class="sparkline10-collapse-link"><i class="fa fa-chevron-up"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="sparkline10-graph">
+                            <div class="input-knob-dial-wrap">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="chosen-select-single mg-b-20" align="center">
+                                            <div class="col-md-3"></div>
+                                            <div class="col-md-6">
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <h3>Select Project</h3>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        @Html.DropDownList("Project", null, "--Select Project--", new { @class = "form-control" })
+                                                    </div>
+                                                </div>
+
+                                                <hr />
+
+                                                @if (User.IsInRole("Admin"))
+                                                {
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <h3>Select Project Manager</h3>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            @Html.DropDownList("ProjectManagerId", null, "--Select Project Manager--", new { @class = "form-control" })
+                                                        </div>
+                                                    </div>
+                                                    <hr />
+                                                }
+
+
+
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <h3>Select Developers</h3>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        @Html.ListBox("Developers", null, new { @class = "form-control" })
+                                                    </div>
+                                                </div>
+
+                                                <hr />
+
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <h3>Select Submitters</h3>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        @Html.ListBox("Submitters", null, new { @class = "form-control" })
+                                                    </div>
+                                                </div>
+
+                                                <br />
+
+                                                <div class="form-group">
+                                                    <div class="row">
+                                                        <div class="col-md-12 mg-t-20">
+                                                          
+                                                                <button type="submit" value="Save Changes" align="center" class="btn btn-success btn-lg">Assign</button>
+                                                                @*<input type="submit" value="Save Changes" class="btn-lg btn-success" />*@
+                                                       
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <br/>
+
+                                <div class="row">
+                                    <div class="col-lg-2"></div>
+                                    <div class="col-lg-8 align-center">
+                                        <table class="table table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th>
+                                                        @Html.DisplayNameFor(model => model.Name)
+                                                    </th>
+                                                    <th>
+                                                        @Html.DisplayName("Role")
+                                                    </th>
+                                                    <th>
+                                                        @Html.DisplayName("Assigned Projects")
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach (var item in Model)
+                                                {
+                                                    <tr>
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.Name)
+                                                        </td>
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.RoleName)
+                                                        </td>
+                                                        <td>
+                                                            @foreach (var name in item.ProjectNames)
+                                                            {
+                                                                @name <br />
+                                                            }
+                                                        </td>
+                                                    </tr>
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="col-lg-2"></div>
+                                </div>
+                           
+                            </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            @Html.DropDownList("ProjectManagerId", null, "--Select--", new { @class = "form-control" })
-                        </div>
-                    </div>
-                    <hr />
-                }
-
-
-                <div class="row">
-                    <div class="col-md-12">
-                        <h3>Developers</h3>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        @Html.ListBox("Developers", null, new { @class = "form-control" })
-                    </div>
-                </div>
-                <hr />
-
-                <div class="row">
-                    <div class="col-md-12">
-                        <h3>Submitters</h3>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        @Html.ListBox("Submitters", null, new { @class = "form-control" })
-                    </div>
                 </div>
             </div>
-        }
+        </div>
     </div>
+}
 
 
-    <div class="row">
-        <table class="table">
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Name)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.RoleName)
-                </th>
-                <th>
-                    @Html.DisplayName("Projects")
-                </th>
-            </tr>
 
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Name)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.RoleName)
-                    </td>
-                    <td>
-                        @foreach (var name in item.ProjectNames)
-                        {
-                            @name <br />
-                        }
-                    </td>
-                </tr>
-            }
-        </table>
-    </div>
+
+
+
+
+ 
+
+
+<!--End Edit Table=======================================================================================================================-->
+
+<div class="row" align="center">
+    <h4 style="font:oblique">
+        | @Html.ActionLink("Return To Home", "Dashboard", "Home") |
+    </h4>
 </div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+}
+
+
+
+
+
+
+@*<div class="form-group">
+                                        @Html.LabelFor(model => model."Select Project", htmlAttributes: new { @class = "control-label col-md-2" })
+                                        <div class="col-md-10 mg-b-20">
+                                            @Html.DisplayFor(model => model.Title)
+                                            @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    @if (User.IsInRole("Submitter") | (User.IsInRole("DemoSubmitter")))
+    {
+        <div class="form-group">
+            @Html.LabelFor(model => model.TicketStatus, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10 mg-b-20">
+                @Html.DisplayFor(model => model.TicketStatus.StatusName)
+                @Html.ValidationMessageFor(model => model.TicketStatus, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    }
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.SubmitterId, "Submitter", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10 mg-b-20">
+            @Html.DisplayFor(model => model.Submitter.FullName)
+            @Html.ValidationMessageFor(model => model.SubmitterId, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.DeveloperId, "Developer", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10 mg-b-20">
+            @Html.DisplayFor(model => model.Developer.FullName)
+            @Html.ValidationMessageFor(model => model.DeveloperId, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Created, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10 mg-b-20">
+            @Html.DisplayFor(model => model.Created)
+            @Html.ValidationMessageFor(model => model.Created, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.TicketTypeId, "TicketTypeId", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10 mg-b-20">
+            @Html.DropDownList("TicketTypeId", null, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.TicketTypeId, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.TicketPriorityId, "TicketPriorityId", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10 mg-b-20">
+            @Html.DropDownList("TicketPriorityId", null, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.TicketPriorityId, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    @if (User.IsInRole("Developer") | (User.IsInRole("DemoDeveloper")))
+    {
+        <div class="form-group">
+            @Html.LabelFor(model => model.TicketStatusId, "TicketStatusId", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10 mg-b-20">
+                @Html.DropDownList("TicketStatusId", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.TicketStatusId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+    }
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10 mg-b-20">
+            @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+        </div>
+    </div>*@
+
+

@@ -232,6 +232,7 @@
     <Content Include="Content\adminpro-custon-icon.css" />
     <Content Include="Content\all-type-forms.css" />
     <Content Include="Content\animate.css" />
+    <Content Include="Content\bootstrap-chosen.css" />
     <Content Include="Content\bootstrap-editable.css" />
     <Content Include="Content\bootstrap-table.css" />
     <Content Include="Content\bootstrap.min.css" />
@@ -246,9 +247,11 @@
     <Content Include="Content\meanmenu.min.css" />
     <Content Include="Content\modals.css" />
     <Content Include="Content\normalize.css" />
+    <Content Include="Content\preloader-style.css" />
     <Content Include="Content\responsive.css" />
     <Content Include="Content\style.css" />
     <Content Include="Content\tabs.css" />
+    <Content Include="Content\themesaller-forms.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -260,6 +263,7 @@
     <Content Include="Images\Cosmo2.jpg" />
     <Content Include="Images\doc-icon.png" />
     <Content Include="Images\docx-icon.png" />
+    <Content Include="Images\favicon-16x16.png" />
     <Content Include="Images\favicon.ico" />
     <Content Include="Images\LadyBugNew.png" />
     <Content Include="Images\log.png" />
@@ -294,6 +298,8 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\Chart.js" />
     <Content Include="Scripts\Chart.min.js" />
+    <Content Include="Scripts\chosen-active.js" />
+    <Content Include="Scripts\chosen.jquery.js" />
     <Content Include="Scripts\colResizable-1.5.source.js" />
     <Content Include="Scripts\counterup-active.js" />
     <Content Include="Scripts\data-table-active.js" />

@@ -4,60 +4,98 @@
     ViewBag.Title = "Index";
 }
 
-<h2 align="center">Ticket Attachments</h2>
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Ticket.SubmitterId)
-        </th>
-        <th>
-            @Html.DisplayName("Comment By")
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Comment)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Created)
-        </th>
-        <th></th>
-    </tr>
 
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Ticket.Submitter.FullName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.User.FullName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Comment)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Created)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-            </td>
-        </tr>
-    }
 
-</table>
 
-<br/>
+<!--=====================================================================================================-->
+
+<div class="admin-dashone-data-table-area mg-b-15">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="sparkline8-list shadow-reset">
+                    <div class="sparkline8-hd">
+                        <div class="main-sparkline8-hd">
+                            <h1>Ticket Comments</h1>
+                            <div class="sparkline8-outline-icon">
+                                <span class="sparkline8-collapse-link"><i class="fa fa-chevron-up"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="sparkline8-graph">
+                        <div class="datatable-dashv1-list custom-datatable-overright">
+
+                            <table id="table" data-toggle="table" data-pagination="true" data-search="true" data-show-columns="true" data-show-pagination-switch="true" data-show-refresh="true" data-key-events="true" data-show-toggle="true" data-resizable="true" data-cookie="true" data-cookie-id-table="saveId" data-show-export="true" data-click-to-select="true" data-toolbar="#toolbar">
+                                <thead>
+                                    <tr>
+                                        <th data-field="id"> @Html.DisplayNameFor(model => model.TicketId)</th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.Ticket.SubmitterId)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayName("Comment By")
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.Comment)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.Created)
+                                        </th>
+
+                                        <th data-field="action">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!--ForEach goes here-->
+                                    @foreach (var item in Model.OrderByDescending(c => c.Created))
+                                    {
+                                        <tr>
+                                            <td>@Html.DisplayFor(modelItem => item.TicketId)</td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Ticket.Submitter.FullName)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.User.FullName)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Comment)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Created)
+                                            </td>
+                                            <td>
+                                                <button class="btn btn-white btn-action btn-xs"><i class="fa fa-folder"></i> @Html.ActionLink("Details", "Details", "Tickets", new { id = item.Ticket.Id }, new { })</button>
+
+                                                <button class="btn btn-white btn-action btn-xs"><i class="fa fa-folder"></i> @Html.ActionLink("Delete", "Delete", new { id = item.Id })</button>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+
+                            </table>
+                            <br />
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<br />
 
 
 <div class="row" align="center">
     <h4 style="font:oblique">
-        @*@Html.ActionLink("Edit", "Edit", new { id = Model.Id })*@ |
-        @Html.ActionLink("Back to List", "Index", "Tickets") |
-        @*@Html.ActionLink("Add Attachment", "TicketAttachments", new { id = Model.Id }, null)*@
+        | @Html.ActionLink("Return To My Tickects", "Index", "Tickets") |
     </h4>
 </div>
+
+<br />
 
 
 

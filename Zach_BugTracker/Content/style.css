@@ -132,7 +132,7 @@ padding: 0
 /*----------------------------------------*/
 .header-top-menu .navbar-nav>li>a{
 	padding: 20px 20px;
-	color: #fff;
+	color: #000;
 	font-size:14px;
 }
 .header-top-menu .navbar-nav>li a .angle-down-topmenu{
@@ -330,7 +330,7 @@ padding: 0
 }
 .header-right-info .admin-name{
 	display: inline-block;
-    color: #fff;
+    color: #000;
     font-size: 16px;
     position: relative;
     top: -4px;
@@ -846,12 +846,12 @@ ul.breadcome-menu li a:hover{
 	font-size:14px;
 	line-height:24px;
 }
-.sparkline-content, .sparkline7-graph, .sparkline8-graph, .sparkline9-graph, .sparkline10-graph, .sparkline11-graph, .sparkline12-graph, .sparkline13-graph, .sparkline14-graph, .sparkline15-graph, .sparkline16-graph{
-	padding:20px;
-	background:#fff;
+.sparkline-content, .sparkline7-graph, .sparkline8-graph, .sparkline9-graph, .sparkline10-graph, .sparkline11-graph, .sparkline12-graph, .sparkline13-graph, .sparkline14-graph, .sparkline15-graph, .sparkline16-graph {
+    padding: 20px;
+    background: #4599b094;
 }
 .sparkline7-graph, .sparkline8-graph, .sparkline9-graph, .sparkline11-graph, .sparkline12-graph, .sparkline13-graph, .sparkline14-graph, .sparkline15-graph, .sparkline16-graph{
-	text-align:center;
+	/*text-align:center;*/
 }
 .smart-sparkline-list {
     padding: 14px 20px;
@@ -1292,10 +1292,10 @@ ul.comment-action-st li a{
     font-size: 14px;
 	text-align:left;
 }
-.custom-datatable-overright table tbody tr td.datatable-ct{
-    text-align:center;
-	color: #03a9f4;
-}
+    .custom-datatable-overright table tbody tr td.datatable-ct {
+        text-align: center;
+        color: #ce5500;
+    }
 .custom-datatable-overright table tbody tr td a{
     color:#303030;
 	font-size:14px;
@@ -2299,7 +2299,7 @@ li.multipleInput-email {
 }
 /*Author widgets Css*/
 .widget-head-info-box{
-	padding:20px;
+	padding:30px;
 	background-color: #fff;
 	text-align: center;
 }
@@ -2331,7 +2331,7 @@ li.multipleInput-email {
 }
 .widget-head-info-box {
 	width: 100%;
-	height: 240px;
+	/*height: 240px;*/
 	color: #fff;
 	background: linear-gradient(-45deg, #EE7752, #E73C7E, #23A6D5, #23D5AB);
 	background-size: 400% 400%;
@@ -3583,7 +3583,7 @@ ul.profile-contact-menu {
 #sidebar {
     min-width: 200px;
     background: #303030;
-    color: #fff;
+    color: #000;
 	position:fixed;
     transition: all 0.3s;
 	z-index:999;
@@ -4010,7 +4010,7 @@ ul.breadcome-menu {
     box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.14);
 }
 .materialdesign #sidebar{
-	background: #fff;
+	background: #4599b0d9;
 	box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
 }
 .materialdesign .sidebar-header h3, .materialdesign #sidebar .sidebar-header strong, .materialdesign .sidebar-header p, .materialdesign .footer-copy-right p, .materialdesign .footer-copy-right a{
@@ -4041,8 +4041,18 @@ ul.breadcome-menu {
 .materialdesign .left-custom-menu-adp-wrap ul.left-sidebar-menu-pro li a:hover, .materialdesign .left-custom-menu-adp-wrap ul.left-sidebar-menu-pro li a:focus, .materialdesign .left-custom-menu-adp-wrap ul.left-sidebar-menu-pro li a:active, .materialdesign .left-custom-menu-adp-wrap ul.left-sidebar-menu-pro li a:visited{
 	background: #ebebeb;
 }
-.materialdesign .left-custom-menu-adp-wrap ul.left-sidebar-menu-pro li .left-menu-dropdown{
-	background: #ececec;
+.materialdesign .left-custom-menu-adp-wrap ul.left-sidebar-menu-pro li .left-menu-dropdown {
+    background: linear-gradient(to bottom, #ff9966 0%, #ff66cc 100%);
+    background-image: linear-gradient(rgb(255, 153, 102) 0%, rgb(255, 102, 204) 100%);
+    background-position-x: initial;
+    background-position-y: initial;
+    background-size: initial;
+    background-repeat-x: initial;
+    background-repeat-y: initial;
+    background-attachment: initial;
+    background-origin: initial;
+    background-clip: initial;
+    background-color: initial;
 }
 .materialdesign .flot-tick-label.tickLabel, .materialdesign .legend > div{
 	color: #fff;

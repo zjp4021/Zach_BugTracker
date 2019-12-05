@@ -35,7 +35,29 @@ namespace Zach_BugTracker.Helpers
             var flag = project.Users.Any(u => u.Id == userId); 
             return (flag); 
         }
-       
+        public ICollection<Project> ListUserProjectsOn(string userId)
+        {
+            var projects = db.Projects.ToList();
+            var projList = new List<Project>();
+
+            foreach(var proj in projects)
+            {
+
+                if (IsUserOnProject(userId, proj.Id))
+                { 
+                    
+                    projList.Add(proj);
+                    db.SaveChanges();
+                }
+
+                
+            }
+
+
+           
+            return (projList);
+        }
+
         public ICollection<Project> ListUserProjects(string userId) 
         { 
             ApplicationUser user = db.Users.Find(userId); 

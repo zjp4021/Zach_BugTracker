@@ -7,6 +7,8 @@ using Zach_BugTracker.Models;
 
 namespace Zach_BugTracker.Controllers
 {
+
+
     [Authorize]
     [RequireHttps]
 

@@ -338,3 +338,7 @@ ASALocalRun/
 
 # BeatPulse healthcheck temp database
 healthchecksdb
+
+*.config
+Zach_BugTracker/App_Start/Startup.Auth
+Zach_BugTracker/Migrations/Configuration.cs

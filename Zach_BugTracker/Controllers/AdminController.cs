@@ -44,34 +44,46 @@ namespace Zach_BugTracker.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult ManageRoles(List<string> userIds, string role)
         {
-            //Step 1: Unenroll all the selected Users from ANY roles
-            //they may currently occupy
-            foreach(var userId in userIds)
+            if (User.IsInRole("DemoAdmin"))
             {
-                //What is the role of this person?
-                var userRole = roleHelper.ListUserRoles(userId).FirstOrDefault();
-                if(userRole != null)
+                Session.Add("Message", "For security reasons Demo Users cannot post updates to the Database.");
+                return RedirectToAction("ManageRoles", "Admin");
+            }
+            else
+            {
+                //Step 1: Unenroll all the selected Users from ANY roles
+                //they may currently occupy
+                foreach(var userId in userIds)
                 {
-                    roleHelper.RemoveUserFromRole(userId, userRole);
+                    //What is the role of this person?
+                    var userRole = roleHelper.ListUserRoles(userId).FirstOrDefault();
+                    if(userRole != null)
+                    {
+                        roleHelper.RemoveUserFromRole(userId, userRole);
+                    }
                 }
+
+                //Step 2: Add them back to the selected Role
+                if (!string.IsNullOrEmpty(role))
+                {
+                    foreach (var userId in userIds)
+                    {
+                        roleHelper.AddUserToRole(userId, role);
+                    }
+                }
+                return RedirectToAction("ManageRoles", "Admin");
+
             }
 
-            //Step 2: Add them back to the selected Role
-            if (!string.IsNullOrEmpty(role))
-            {
-                foreach (var userId in userIds)
-                {
-                    roleHelper.AddUserToRole(userId, role);
-                }
-            }
-            return RedirectToAction("ManageRoles", "Admin");
+
         }
     
     
         [Authorize(Roles = "Admin, Project_Manager, DemoAdmin, DemoPM")]
         public ActionResult ManageProjectUsers()
         {
-            ViewBag.Projects = new MultiSelectList(db.Projects, "Id", "ProjectName");
+            var project = db.Projects;
+            ViewBag.Project = new SelectList(project, "Id", "ProjectName");
             ViewBag.Developers = new MultiSelectList(roleHelper.UsersInRole("Developer").Union(roleHelper.UsersInRole("DemoDeveloper")), "Id", "FullName");
             ViewBag.Submitters = new MultiSelectList(roleHelper.UsersInRole("Submitter").Union(roleHelper.UsersInRole("DemoSubmitter")), "Id", "FullName");
 
@@ -101,46 +113,52 @@ namespace Zach_BugTracker.Controllers
 
 
         }
-    
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult ManageProjectUsers(List<int> projects, string projectManagerId, List<string> developers, List<string> submitters)
+        public ActionResult ManageProjectUsers(string projectManagerId, List<string> developers, List<string> submitters, int project = 0)
         {
             //Remove users from every project I have selected
-            if(projects != null)
+            if (project > 0)
             {
-                foreach(var projectId in projects)
+
+                //Remove everyone from THIS project
+                foreach (var user in projHelper.UsersOnProject(project).ToList())
                 {
-                    //Remove everyone from THIS project
-                    foreach(var user in projHelper.UsersOnProject(projectId).ToList())
-                    {
-                        projHelper.RemoveUserFromProject(user.Id, projectId);
-                    }
+                    projHelper.RemoveUserFromProject(user.Id, project);
+                }
 
-                    //Add back a PM if I can
-                    if (!string.IsNullOrEmpty(projectManagerId))
-                    {
-                        projHelper.AddUserToProject(projectManagerId, projectId);
-                    }
+                //Add back a PM if I can
+                if (!string.IsNullOrEmpty(projectManagerId))
+                {
+                    projHelper.AddUserToProject(projectManagerId, project);
+                    var proj = db.Projects.Find(project);
+                   
+                }
 
-                    if(developers != null)
+                if (developers != null)
+                {
+                    foreach (var developerId in developers)
                     {
-                        foreach(var developerId in developers)
-                        {
-                            projHelper.AddUserToProject(developerId, projectId);
-                        }
-                    }
+                        projHelper.AddUserToProject(developerId, project);
 
-                    if(submitters != null)
+                    }
+                }
+
+                if (submitters != null)
+                {
+                    foreach (var submitterId in submitters)
                     {
-                        foreach(var submitterId in submitters)
-                        {
-                            projHelper.AddUserToProject(submitterId, projectId);
-                        }
-                    }          
-                }         
+                        projHelper.AddUserToProject(submitterId, project);
+
+                    }
+                }
             }
-            return RedirectToAction("ManageProjectUsers");
+
+            db.SaveChanges();
+      
+            
+            return RedirectToAction("ManageProjectUsers", "Admin");
         }
     }
 }

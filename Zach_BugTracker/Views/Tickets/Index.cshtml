@@ -33,7 +33,7 @@
                                         <th> @Html.DisplayName("Priority") </th>
                                         <th> @Html.DisplayName("Type") </th>
                                        
-                                        <th data-field="task"> @Html.DisplayNameFor(model => model.Description)</th>
+                                        <th> @Html.DisplayNameFor(model => model.Description)</th>
                                         <th> @Html.DisplayName("Submitter")</th>
                                         <th> @Html.DisplayName("Developer")</th>
                                         <th> @Html.DisplayNameFor(model => model.Created)</th>
@@ -53,24 +53,21 @@
                                         <td>@Html.DisplayFor(modelItem => item.Id)</td>
                                         <td>
                                             <div class="btn-group project-list-ad">
-                                                <button class="btn btn-white btn-xs"> @Html.DisplayFor(modelItem => item.TicketStatus.StatusName)</button>
+                                                <b class="btn btn-white btn-xs"> @Html.DisplayFor(modelItem => item.TicketStatus.StatusName)</b>
                                             </div>
                                         </td>
                                         <td> @Html.DisplayFor(modelItem => item.Project.ProjectName)</td>
                                         <td> @Html.DisplayFor(modelItem => item.TicketPriority.PriorityName)</td>
-                                        <td class="datatable-ct">
-                                            @Html.DisplayFor(modelItem => item.TicketType.TypeName)
-                                            @*<span class="pie">1/6</span>*@
-                                        </td>
-                                     
+                                        <td class="datatable-ct"> @Html.DisplayFor(modelItem => item.TicketType.TypeName)</td>
+
                                         <td> @Html.DisplayFor(modelItem => item.Description)</td>
                                         <td> @Html.DisplayFor(modelItem => item.Submitter.FullName)</td>
                                         <td> @Html.DisplayFor(modelItem => item.Developer.FullName)</td>
                                         <td> @Html.DisplayFor(modelItem => item.Created)</td>
                                         <td> @Html.DisplayFor(modelItem => item.Updated)</td>
-                                      
-                                     
-      
+
+
+
                                         <td>
                                             <div class="btn-group project-list-action">
                                                 <button class="btn btn-white btn-action btn-xs"><i class="fa fa-folder"></i>  @Html.ActionLink("Details", "Details", new { id = item.Id })</button>

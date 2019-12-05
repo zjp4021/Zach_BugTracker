@@ -15,7 +15,9 @@ namespace Zach_BugTracker.Models
     // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit https://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
     public class ApplicationUser : IdentityUser
     {
-        public ApplicationDbContext db = new ApplicationDbContext();
+        //public ApplicationDbContext db = new ApplicationDbContext();
+
+
         public RoleHelper roleHelper = new RoleHelper();
 
         [Display(Name = "First Name")]
@@ -42,31 +44,15 @@ namespace Zach_BugTracker.Models
             }
         }
 
-        public string GetUserRole()
-        {
-            return roleHelper.ListUserRoles(Id).FirstOrDefault();
-        }
-
-        public bool IsUserDemo()
-        {
-            switch (GetUserRole())
-            {
-                case "DemoAdmin":
-                case "DemoPM":
-                case "DemoSubmitter":
-                case "DemoDeveloper":
-                    return true;
-                default:
-                    return false;
-            }
-        }
+      
 
 
-
+ 
         public virtual ICollection<Project> Projects { get; set; }
         public virtual ICollection<TicketComments> TicketComments { get; set; }
         public virtual ICollection<TicketAttachments> TicketAttachments { get; set; }
         public virtual ICollection<TicketHistory> TicketHistories { get; set; }
+
         //public virtual ICollection<TicketNotifications> TicketNotifications { get; set; }
 
         //We will not include an ICollection of Tickets even though 
@@ -105,6 +91,7 @@ namespace Zach_BugTracker.Models
 
         //    if (role.IsDemoUser(userId))
         //    {
+        //        HttpContext.Current.Session.Add("Message", "For security reasons Demo Users cannot post updates to the Database.");
         //        //need sweet alert here
         //        return 0;
         //    }
