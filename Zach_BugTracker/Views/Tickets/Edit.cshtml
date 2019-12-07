@@ -49,16 +49,16 @@
                                             </div>
                                         </div>
 
-                                        @if (User.IsInRole("Submitter") | (User.IsInRole("DemoSubmitter")))
-                                        {
-                                            <div class="form-group">
-                                                @Html.LabelFor(model => model.TicketStatus, htmlAttributes: new { @class = "control-label col-md-2" })
-                                                <div class="col-md-10 mg-b-20">
-                                                    @Html.DisplayFor(model => model.TicketStatus.StatusName)
-                                                    @Html.ValidationMessageFor(model => model.TicketStatus, "", new { @class = "text-danger" })
-                                                </div>
-                                            </div>
-                                        }
+                                        @*@if (User.IsInRole("Submitter") | (User.IsInRole("DemoSubmitter")))
+        {
+            <div class="form-group">
+                @Html.LabelFor(model => model.TicketStatus, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10 mg-b-20">
+                    @Html.DisplayFor(model => model.TicketStatus.StatusName)
+                    @Html.ValidationMessageFor(model => model.TicketStatus, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        }*@
 
                                         <div class="form-group">
                                             @Html.LabelFor(model => model.SubmitterId, "Submitter", htmlAttributes: new { @class = "control-label col-md-2" })
@@ -68,13 +68,36 @@
                                             </div>
                                         </div>
 
-                                        <div class="form-group">
+
+                                        @if (Model.DeveloperId != null)
+                                        {
+                                            <div class="form-group">
+                                                @Html.LabelFor(model => model.DeveloperId, "Developer", htmlAttributes: new { @class = "control-label col-md-2" })
+                                                <div class="col-md-10 mg-b-20">
+                                                    @Html.DisplayFor(model => model.Developer.FullName)
+                                                    @Html.ValidationMessageFor(model => model.DeveloperId, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="form-group">
+                                                @Html.LabelFor(model => model.DeveloperId, "Developer", htmlAttributes: new { @class = "control-label col-md-2" })
+                                                <div class="col-md-10 mg-b-20">
+                                                    @Html.DisplayName("N/A")
+                                                    @Html.ValidationMessageFor(model => model.DeveloperId, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                        }
+
+
+                                        @*<div class="form-group">
                                             @Html.LabelFor(model => model.DeveloperId, "Developer", htmlAttributes: new { @class = "control-label col-md-2" })
                                             <div class="col-md-10 mg-b-20">
                                                 @Html.DisplayFor(model => model.Developer.FullName)
                                                 @Html.ValidationMessageFor(model => model.DeveloperId, "", new { @class = "text-danger" })
                                             </div>
-                                        </div>
+                                        </div>*@
 
                                         <div class="form-group">
                                             @Html.LabelFor(model => model.Created, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -83,6 +106,30 @@
                                                 @Html.ValidationMessageFor(model => model.Created, "", new { @class = "text-danger" })
                                             </div>
                                         </div>
+
+
+
+                                        @if (User.IsInRole("Developer") | (User.IsInRole("DemoDeveloper")))
+                                        {
+                                            <div class="form-group">
+                                                @Html.LabelFor(model => model.TicketStatusId, "TicketStatusId", htmlAttributes: new { @class = "control-label col-md-2" })
+                                                <div class="col-md-10 mg-b-20">
+                                                    @Html.DropDownList("TicketStatusId", null, htmlAttributes: new { @class = "form-control" })
+                                                    @Html.ValidationMessageFor(model => model.TicketStatusId, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+
+                                        }
+                                        else
+                                        {
+                                            <div class="form-group">
+                                                @Html.LabelFor(model => model.TicketStatus, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                <div class="col-md-10 mg-b-20">
+                                                    @Html.DisplayFor(model => model.TicketStatus.StatusName)
+                                                    @Html.ValidationMessageFor(model => model.TicketStatus, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                        }
 
 
                                         <div class="form-group">
@@ -101,17 +148,17 @@
                                             </div>
                                         </div>
 
-                                        @if (User.IsInRole("Developer") | (User.IsInRole("DemoDeveloper")))
-                                        {
-                                            <div class="form-group">
-                                                @Html.LabelFor(model => model.TicketStatusId, "TicketStatusId", htmlAttributes: new { @class = "control-label col-md-2" })
-                                                <div class="col-md-10 mg-b-20">
-                                                    @Html.DropDownList("TicketStatusId", null, htmlAttributes: new { @class = "form-control" })
-                                                    @Html.ValidationMessageFor(model => model.TicketStatusId, "", new { @class = "text-danger" })
-                                                </div>
-                                            </div>
+                                        @*@if (User.IsInRole("Developer") | (User.IsInRole("DemoDeveloper")))
+        {
+            <div class="form-group">
+                @Html.LabelFor(model => model.TicketStatusId, "TicketStatusId", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10 mg-b-20">
+                    @Html.DropDownList("TicketStatusId", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.TicketStatusId, "", new { @class = "text-danger" })
+                </div>
+            </div>
 
-                                        }
+        }*@
 
                                         <div class="form-group">
                                             @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -152,12 +199,16 @@
 }
 <!--End Edit Table=======================================================================================================================-->
 
+
+<br/>
+
 <div class="row" align="center">
     <h4 style="font:oblique">
         | @Html.ActionLink("Return To My Tickets", "Index", "Tickets") |
     </h4>
 </div>
 
+<br/>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

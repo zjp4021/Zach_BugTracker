@@ -22,7 +22,7 @@
                     </div>
                     <div class="sparkline8-graph">
                         <div class="datatable-dashv1-list custom-datatable-overright">
-                         
+
                             <table id="table" data-toggle="table" data-pagination="true" data-search="true" data-show-columns="true" data-show-pagination-switch="true" data-show-refresh="true" data-key-events="true" data-show-toggle="true" data-resizable="true" data-cookie="true" data-cookie-id-table="saveId" data-show-export="true" data-click-to-select="true" data-toolbar="#toolbar">
                                 <thead>
                                     <tr>
@@ -30,15 +30,15 @@
                                         <th data-field="id"> @Html.DisplayNameFor(model => model.Id)</th>
                                         <th data-field="status"> @Html.DisplayName("Status")</th>
                                         <th> @Html.DisplayName("Project") </th>
-                                        <th> @Html.DisplayName("Priority") </th>
-                                        <th> @Html.DisplayName("Type") </th>
-                                       
+                                        <th style="width:100px;"> @Html.DisplayName("Priority") </th>
+                                        <th style="width:100px;"> @Html.DisplayName("Type") </th>
+
                                         <th> @Html.DisplayNameFor(model => model.Description)</th>
                                         <th> @Html.DisplayName("Submitter")</th>
                                         <th> @Html.DisplayName("Developer")</th>
                                         <th> @Html.DisplayNameFor(model => model.Created)</th>
                                         <th> @Html.DisplayNameFor(model => model.Updated)</th>
-                                      
+
 
                                         @*<th data-field="support">Participants</th>*@
                                         <th data-field="action">Action</th>
@@ -48,43 +48,44 @@
                                     <!--ForEach goes here-->
                                     @foreach (var item in Model)
                                     {
-                                    <tr>
-                                        @*<td></td>*@
-                                        <td>@Html.DisplayFor(modelItem => item.Id)</td>
-                                        <td>
-                                            <div class="btn-group project-list-ad">
-                                                <b class="btn btn-white btn-xs"> @Html.DisplayFor(modelItem => item.TicketStatus.StatusName)</b>
-                                            </div>
-                                        </td>
-                                        <td> @Html.DisplayFor(modelItem => item.Project.ProjectName)</td>
-                                        <td> @Html.DisplayFor(modelItem => item.TicketPriority.PriorityName)</td>
-                                        <td class="datatable-ct"> @Html.DisplayFor(modelItem => item.TicketType.TypeName)</td>
+                                        <tr>
+                                            @*<td></td>*@
+                                            <td>@Html.DisplayFor(modelItem => item.Id)</td>
+                                            <td>
+                                                <div class="btn-group project-list-ad">
+                                                    <b class="btn btn-white btn-xs"> @Html.DisplayFor(modelItem => item.TicketStatus.StatusName)</b>
+                                                </div>
+                                            </td>
+                                            <td> @Html.DisplayFor(modelItem => item.Project.ProjectName)</td>
+                                            <td style="width:100px;"> @Html.DisplayFor(modelItem => item.TicketPriority.PriorityName)</td>
+                                            <td style="width:100px;"> @Html.DisplayFor(modelItem => item.TicketType.TypeName)</td>
 
-                                        <td> @Html.DisplayFor(modelItem => item.Description)</td>
-                                        <td> @Html.DisplayFor(modelItem => item.Submitter.FullName)</td>
-                                        <td> @Html.DisplayFor(modelItem => item.Developer.FullName)</td>
-                                        <td> @Html.DisplayFor(modelItem => item.Created)</td>
-                                        <td> @Html.DisplayFor(modelItem => item.Updated)</td>
-
-
-
-                                        <td>
-                                            <div class="btn-group project-list-action">
-                                                <button class="btn btn-white btn-action btn-xs"><i class="fa fa-folder"></i>  @Html.ActionLink("Details", "Details", new { id = item.Id })</button>
-
-                                                @if (User.IsInRole("Submitter") | User.IsInRole("DemoSubmitter") | (User.IsInRole("Developer") | User.IsInRole("DemoDeveloper")))
-                                                {
-                                                    <button class="btn btn-white btn-xs"><i class="fa fa-pencil"></i>  @Html.ActionLink("Edit", "Edit", new { id = item.Id }) </button>
-                                                }
+                                            <td> @Html.DisplayFor(modelItem => item.Description)</td>
+                                            <td> @Html.DisplayFor(modelItem => item.Submitter.FullName)</td>
+                                            <td> @Html.DisplayFor(modelItem => item.Developer.FullName)</td>
+                                            <td> @Html.DisplayFor(modelItem => item.Created)</td>
+                                            <td> @Html.DisplayFor(modelItem => item.Updated)</td>
 
 
-                                                @if (User.IsInRole("Admin") | User.IsInRole("Project_Manager") | (User.IsInRole("DemoAdmin") | User.IsInRole("DemoPM")))
-                                                {
-                                                    <button class="btn btn-white btn-action btn-xs"><i class="fa fa-check"></i>  @Html.ActionLink("Assign", "AssignTicket", new { id = item.Id }) </button>
-                                                }
-                                            </div>
-                                        </td>
-                                    </tr>    
+
+                                            <td>
+                                                <div class="btn-group project-list-action">
+                                                    <button class="btn btn-white btn-action btn-xs"><i class="fa fa-folder"></i>  @Html.ActionLink("Details", "Details", new { id = item.Id })</button>
+
+                                                    @if (User.IsInRole("Submitter") | User.IsInRole("DemoSubmitter") | (User.IsInRole("Developer") | User.IsInRole("DemoDeveloper")))
+                                                    {
+                                                        <button class="btn btn-white btn-xs"><i class="fa fa-pencil"></i>  @Html.ActionLink("Edit", "Edit", new { id = item.Id }) </button>
+                                                    }
+
+
+                                                    @if (User.IsInRole("Admin") | User.IsInRole("Project_Manager") | (User.IsInRole("DemoAdmin") | User.IsInRole("DemoPM")))
+                                                    {
+                                                        <button class="btn btn-white btn-action btn-xs"><i class="fa fa-check"></i>  @Html.ActionLink("Assign", "AssignTicket", new { id = item.Id }) </button>
+                                                    }
+                                                </div>
+                                            </td>
+                                        </tr>
+
                                     }
                             </table>
                         </div>
@@ -94,6 +95,18 @@
         </div>
     </div>
 </div>
+
+
+<br />
+
+<div class="row" align="center">
+    <h4 style="font:oblique">
+       |
+        @Html.ActionLink("Return To My Projects", "Index", "Projects") |
+       
+    </h4>
+</div>
+
 
 
 @section scripts{
@@ -107,8 +120,8 @@
                 text: message
             })
         };
-    </script>                                
-                                    
+    </script>
+
 }
 <!--Scripts===============================================-->
 <script src="~/Scripts/modal-active.js"></script>

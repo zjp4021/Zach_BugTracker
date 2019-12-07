@@ -83,21 +83,21 @@ namespace Zach_BugTracker.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         //NEED TO COMMENT OUT THE OVERRIDE SAVE CHANGES IF YOU NEED TO UPDATE DATABASE/////////////////////////////////////////////////////////////////////////////////////////////////// 
-        //public override int SaveChanges()
-        //{
+        public override int SaveChanges()
+        {
 
-        //    var userId = HttpContext.Current.User.Identity.GetUserId();
-        //    RoleHelper role = new RoleHelper();
+            var userId = HttpContext.Current.User.Identity.GetUserId();
+            RoleHelper role = new RoleHelper();
 
-        //    if (role.IsDemoUser(userId))
-        //    {
-        //        HttpContext.Current.Session.Add("Message", "For security reasons Demo Users cannot post updates to the Database.");
-        //        //need sweet alert here
-        //        return 0;
-        //    }
+            if (role.IsDemoUser(userId))
+            {
+                HttpContext.Current.Session.Add("Message", "For security reasons Demo Users cannot post updates to the Database.");
+                //need sweet alert here
+                return 0;
+            }
 
-        //    return base.SaveChanges();
-        //}
+            return base.SaveChanges();
+        }
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {

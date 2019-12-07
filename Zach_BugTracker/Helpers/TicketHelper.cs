@@ -55,15 +55,19 @@ namespace Zach_BugTracker.Helpers
             switch (myRole)
             {
                 case "Admin":
+                case "DemoAdmin":
                     myTickets.AddRange(db.Tickets);
                     break;
                 case "Project_Manager":
+                case "DemoPM":
                     myTickets.AddRange(user.Projects.SelectMany(p => p.Tickets));
                     break;
                 case "Developer":
+                case "DemoDeveloper":
                     myTickets.AddRange(db.Tickets.Where(t => t.DeveloperId == userId));
                     break;
                 case "Submitter":
+                case "DemoSubmitter":
                     myTickets.AddRange(db.Tickets.Where(t => t.SubmitterId == userId));
                     break;
                 default:

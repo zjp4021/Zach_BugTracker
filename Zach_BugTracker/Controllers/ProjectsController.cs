@@ -131,7 +131,7 @@ namespace Zach_BugTracker.Controllers
 
         // GET: Projects/Create
 
-        [Authorize(Roles ="Admin")]
+        [Authorize(Roles ="Admin, Project_Manager, DemoAdmin, DemoPM")]
         public ActionResult Create()
         {
             return View();
@@ -140,10 +140,10 @@ namespace Zach_BugTracker.Controllers
         // POST: Projects/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [Authorize(Roles = "Admin")]
+       
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,ProjectName,Description,ProjectManager")] Project project)
+        public ActionResult Create([Bind(Include = "Id,ProjectName,Description")] Project project)
         {
             if (ModelState.IsValid)
             {
@@ -152,6 +152,12 @@ namespace Zach_BugTracker.Controllers
                 
                 db.Projects.Add(project);
                 db.SaveChanges();
+                if (User.IsInRole("Project_Manager") || User.IsInRole("DemoPM"))
+                {
+                    var userId = User.Identity.GetUserId();
+                    projectsHelper.AddUserToProject(userId, project.Id);
+
+                }
                 return RedirectToAction("Index");
             }
 

@@ -227,16 +227,16 @@ namespace Zach_BugTracker.Migrations
             userManager.AddToRole(userId, "Admin");
 
             userId = userManager.FindByEmail("DemoAdmin@Mailinator.com").Id;
-            userManager.AddToRole(userId, "Admin");
+            userManager.AddToRole(userId, "DemoAdmin");
 
             userId = userManager.FindByEmail("DemoPM@Mailinator.com").Id;
-            userManager.AddToRole(userId, "Project_Manager");
+            userManager.AddToRole(userId, "DemoPM");
 
             userId = userManager.FindByEmail("DemoDeveloper@Mailinator.com").Id;
-            userManager.AddToRole(userId, "Developer");
+            userManager.AddToRole(userId, "DemoDeveloper");
 
             userId = userManager.FindByEmail("DemoSubmitter@Mailinator.com").Id;
-            userManager.AddToRole(userId, "Submitter");
+            userManager.AddToRole(userId, "DemoSubmitter");
             
             #endregion
 

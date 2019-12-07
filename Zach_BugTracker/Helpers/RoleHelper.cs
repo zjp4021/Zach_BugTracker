@@ -10,7 +10,7 @@ namespace Zach_BugTracker.Helpers
 {
     public class RoleHelper
     {
-        //private UserManager<ApplicationUser> userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
+       
         private UserManager<ApplicationUser> userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
         public bool IsUserInRole(string userId, string roleName) 
         { 

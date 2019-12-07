@@ -47,7 +47,7 @@ namespace Zach_BugTracker.Controllers
         {
             var userId = User.Identity.GetUserId();
            
-            if (roleHelper.ListUserRoles(userId).FirstOrDefault().ToLower().Contains("demo"))
+            if (roleHelper.ListUserRoles(userId).FirstOrDefault().ToLower().Contains("Demo"))
             {
                 return RedirectToAction("Index");
             }

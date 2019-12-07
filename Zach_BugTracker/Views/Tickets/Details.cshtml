@@ -1,7 +1,8 @@
-﻿@model Zach_BugTracker.Models.Ticket
-
+﻿
 @using Zach_BugTracker.Helpers
 @using Microsoft.AspNet.Identity
+
+@model Zach_BugTracker.Models.Ticket
 
 @{
     var UserHelper = new UserHelper();
@@ -178,137 +179,132 @@
                                 </div>
                             </div>
                         </div>
+
                         <div class="row">
-                            <div class="col-lg-2">
+
+                            <div class="col-lg-3">
                                 <div class="project-pregress-details">
                                     <span><strong>Completed:</strong></span>
                                 </div>
                             </div>
-                            <div class="col-lg-10">
+                            <div class="col-lg-8">
                                 <div class="skill-content-3 project-details-progress">
                                     <div class="skill">
                                         <div class="progress">
-                                            <div class="progress-bar wow fadeInLeft" data-progress="95%" style="width: 95%;" data-wow-duration="1.5s" data-wow-delay="1.2s">
-                                                <span>95%</span>
+                                            <div class="progress-bar wow fadeInLeft" data-progress="45%" style="width: 45%;" data-wow-duration="1.5s" data-wow-delay="1.2s">
+                                                <span>45%</span>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
-
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div class="project-details-tab">
-                                    <ul class="nav nav-tabs res-pd-less-sm">
-                                        <li>
-                                            <a data-toggle="tab" href="#home">Notifications</a>
-                                        </li>
-                                        <li>
-                                            <a data-toggle="tab" href="#menu1">History</a>
-                                        </li>
-                                    </ul>
-                                    <div class="tab-content res-tab-content-project">
-                                        <div id="menu1" class="tab-pane fade in active animated slideInUp">
-                                            <div class="project-details-completeness">
-                                                <table class="table table-striped">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>@Html.DisplayName("Submitter")</th>
-                                                            <th>@Html.DisplayName("Updated By")</th>
-                                                            <th>@Html.DisplayName("Property")</th>
-                                                            <th>@Html.DisplayName("Original")</th>
-                                                            <th>@Html.DisplayName("Updated To")</th>
-                                                            <th>@Html.DisplayName("Date Updated")</th>
-                                                            <th></th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-
-                                                        @foreach (var item in Model.TicketHistories)
-                                                        {
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="project-details-tab">
+                                        <ul class="nav nav-tabs res-pd-less-sm">
+                                            <li>
+                                                <a data-toggle="tab" href="#home" aria-expanded="true">Notifications</a>
+                                            </li>
+                                            <li>
+                                                <a data-toggle="tab" href="#menu1" aria-expanded="false">History</a>
+                                            </li>
+                                        </ul>
+                                        <div class="tab-content res-tab-content-project">
+                                            <div id="menu1" class="tab-pane fade in active animated slideInUp">
+                                                <div class="project-details-completeness">
+                                                    <table class="table table-striped">
+                                                        <thead>
                                                             <tr>
-                                                                <td>
-                                                                    @Html.DisplayFor(modelItem => item.Updater.FullName)
-                                                                </td>
-                                                                <td>
-                                                                    @Html.DisplayFor(modelItem => item.Ticket.Submitter.FullName)
-                                                                </td>
-                                                                <td>
-                                                                    @Html.DisplayFor(modelItem => item.Property)
-                                                                </td>
-                                                                <td>
-                                                                    @Html.DisplayFor(modelItem => item.OldValue)
-                                                                </td>
-                                                                <td>
-                                                                    @Html.DisplayFor(modelItem => item.NewValue)
-                                                                </td>
-                                                                <td>
-                                                                    @Html.DisplayFor(modelItem => item.UpdatedDate)
-                                                                </td>
-
-
+                                                                <th>@Html.DisplayName("Submitter")</th>
+                                                                <th>@Html.DisplayName("Updated By")</th>
+                                                                <th>@Html.DisplayName("Property")</th>
+                                                                <th>@Html.DisplayName("Original")</th>
+                                                                <th>@Html.DisplayName("Updated To")</th>
+                                                                <th>@Html.DisplayName("Date Updated")</th>
+                                                                <th></th>
                                                             </tr>
-                                                        }
+                                                        </thead>
+                                                        <tbody>
 
-                                                    </tbody>
-                                                </table>
+                                                            @foreach (var item in Model.TicketHistories)
+                                                            {
+                                                                <tr>
+                                                                    <td>
+                                                                        @Html.DisplayFor(modelItem => item.Updater.FullName)
+                                                                    </td>
+                                                                    <td>
+                                                                        @Html.DisplayFor(modelItem => item.Ticket.Submitter.FullName)
+                                                                    </td>
+                                                                    <td>
+                                                                        @Html.DisplayFor(modelItem => item.Property)
+                                                                    </td>
+                                                                    <td>
+                                                                        @Html.DisplayFor(modelItem => item.OldValue)
+                                                                    </td>
+                                                                    <td>
+                                                                        @Html.DisplayFor(modelItem => item.NewValue)
+                                                                    </td>
+                                                                    <td>
+                                                                        @Html.DisplayFor(modelItem => item.UpdatedDate)
+                                                                    </td>
+
+
+                                                                </tr>
+                                                            }
+
+                                                        </tbody>
+                                                    </table>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div id="home" class="tab-pane fade in active animated bounceInUp">
-                                            <div class="project-details-completeness">
-                                                <table class="table table-striped">
-                                                    <thead>
-                                                        <tr>
-                                                            <th class="text-nowrap">@Html.DisplayName("Recipient")</th>
-                                                            <th class="text-nowrap">@Html.DisplayName("Submitter")</th>
-                                                            <th>@Html.DisplayName("Notification")</th>
-                                                            <th>@Html.DisplayName("Created Date")</th>
-                                                            <th class="text-nowrap">@Html.DisplayName("Is Read")</th>
-                                                            <th></th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-
-                                                        @foreach (var item in Model.TicketNotifications)
-                                                        {
+                                            <div id="home" class="tab-pane fade in active animated bounceInUp">
+                                                <div class="project-details-completeness">
+                                                    <table class="table table-striped">
+                                                        <thead>
                                                             <tr>
-                                                                <td>
-                                                                    @Html.DisplayFor(modelItem => item.Recipient.FullName)
-                                                                </td>
-                                                                <td>
-                                                                    @Html.DisplayFor(modelItem => item.Ticket.Submitter.FullName)
-                                                                </td>
-                                                                <td>
-                                                                    @Html.DisplayFor(modelItem => item.NotificationBody)
-                                                                </td>
-                                                                <td>
-                                                                    @Html.DisplayFor(modelItem => item.CreatedDate)
-                                                                </td>
-                                                                <td>
-                                                                    @Html.DisplayFor(modelItem => item.IsRead)
-                                                                </td>
-                                                                @*<td>
-                                                                        @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                                                                        @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                                                                        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-                                                                    </td>*@
+                                                                <th class="text-nowrap">@Html.DisplayName("Recipient")</th>
+                                                                <th class="text-nowrap">@Html.DisplayName("Submitter")</th>
+                                                                <th>@Html.DisplayName("Notification")</th>
+                                                                <th>@Html.DisplayName("Created Date")</th>
+                                                                <th class="text-nowrap">@Html.DisplayName("Is Read")</th>
+                                                                <th></th>
                                                             </tr>
-                                                        }
+                                                        </thead>
+                                                        <tbody>
 
-                                                    </tbody>
-                                                </table>
+                                                            @foreach (var item in Model.TicketNotifications)
+                                                            {
+                                                                <tr>
+                                                                    <td>
+                                                                        @Html.DisplayFor(modelItem => item.Recipient.FullName)
+                                                                    </td>
+                                                                    <td>
+                                                                        @Html.DisplayFor(modelItem => item.Ticket.Submitter.FullName)
+                                                                    </td>
+                                                                    <td>
+                                                                        @Html.DisplayFor(modelItem => item.NotificationBody)
+                                                                    </td>
+                                                                    <td>
+                                                                        @Html.DisplayFor(modelItem => item.CreatedDate)
+                                                                    </td>
+                                                                    <td>
+                                                                        @Html.DisplayFor(modelItem => item.IsRead)
+                                                                    </td>
+
+                                                                </tr>
+                                                            }
+
+                                                        </tbody>
+                                                    </table>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+
                         </div>
-
-
-
-
                     </div>
                 </div>
             </div>
@@ -635,24 +631,6 @@
 
 <!--END OF ATTACHMENT MODAL==================================================================================================================-->
 
-<div id="PrimaryModalalert" class="modal modal-adminpro-general default-popup-PrimaryModal fade" role="dialog">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-close-area modal-close-df">
-                <a class="close" data-dismiss="modal" href="#"><i class="fa fa-close"></i></a>
-            </div>
-            <div class="modal-body">
-                <i class="fa fa-check modal-check-pro"></i>
-                <h2>Awesome!</h2>
-                <p>The Modal plugin is a dialog box/popup window that is displayed on top of the current page</p>
-            </div>
-            <div class="modal-footer">
-                <a data-dismiss="modal" href="#">Cancel</a>
-                <a href="#">Process</a>
-            </div>
-        </div>
-    </div>
-</div>
 
 
 
