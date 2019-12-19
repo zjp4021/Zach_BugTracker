@@ -75,8 +75,8 @@
                                         </div>
                                         <div class="col-lg-6" align="center">
                                             @*<div class="login-input-area">*@
-                                                @Html.EditorFor(model => model.LastName)
-                                                <i class="fa fa-user login-user"></i>
+                                            @Html.EditorFor(model => model.LastName)
+                                            <i class="fa fa-user login-user"></i>
                                             @*</div>*@
                                         </div>
                                     </div>
@@ -118,7 +118,15 @@
                                         </div>
                                     </div>
                                 </div>
-                           
+
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="login-button-pro" align="center">
+                                            @Html.ActionLink("Change Password", "ChangePassword", "Manage", new { @class = "btn btn-custon-rounded-three btn-warning", align="center" })
+                                            @Html.ActionLink("Reset Password", "ResetPassword", "Account", new { @class = "btn btn-custon-rounded-three btn-warning" })
+                                        </div>
+                                    </div>
+                                </div>
 
                             }
                         </div>

@@ -21,6 +21,7 @@ namespace Zach_BugTracker.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+       
 
         public AccountController()
         {
@@ -61,10 +62,23 @@ namespace Zach_BugTracker.Controllers
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
+            if (User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("CustomLogOff", "Account");
+            }
+
             ViewBag.ReturnUrl = returnUrl;
             return View();
         }
 
+        // GET: /Account/Login
+        [AllowAnonymous]
+
+        public ActionResult CustomLogOff()
+        {
+            AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+            return RedirectToAction("Login", "Account");
+        }
 
         //Demo Account Login
         [AllowAnonymous]
@@ -72,6 +86,11 @@ namespace Zach_BugTracker.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DemoLoginAsync(string emailKey)
         {
+            if (User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("CustomLogOff", "Account");
+            }
+
             var email = WebConfigurationManager.AppSettings[emailKey];
             var password = WebConfigurationManager.AppSettings["DemoUserPassword"];
 
@@ -211,6 +230,7 @@ namespace Zach_BugTracker.Controllers
                 {
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     
+
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
                     //string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
@@ -462,11 +482,11 @@ namespace Zach_BugTracker.Controllers
             return RedirectToAction("Login", "Account");
         }
 
-        public ActionResult CustomLogOff()
-        {
-            AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
-            return RedirectToAction("Login", "Account");
-        }
+        //public ActionResult CustomLogOff()
+        //{
+        //    AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+        //    return RedirectToAction("Login", "Account");
+        //}
 
         //
         // GET: /Account/ExternalLoginFailure

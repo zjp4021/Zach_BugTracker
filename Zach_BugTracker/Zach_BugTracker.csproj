@@ -338,6 +338,15 @@
     <Content Include="Scripts\waypoints.min.js" />
     <Content Include="Scripts\world_countries.js" />
     <Content Include="Scripts\xediable-active.js" />
+    <Content Include="Uploads\background-bugtracker_637109709733980544.jpg" />
+    <Content Include="Uploads\bug2_637103775303185224.jfif" />
+    <Content Include="Uploads\bug_637103772908307825.jfif" />
+    <Content Include="Uploads\logo_637091683958807021.jfif" />
+    <Content Include="Uploads\logo_637094342283701582.jfif" />
+    <Content Include="Uploads\mailbox_637109709122417670.jpg" />
+    <Content Include="Uploads\oldebeau_637102095275969982.jpg" />
+    <Content Include="Uploads\sea-split-photo_637091559828157978.jpg" />
+    <Content Include="Uploads\vsdeploymentfailure_637093589046581882.txt" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -420,7 +429,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Uploads\" />
     <Folder Include="Views\Graphing\" />
   </ItemGroup>
   <ItemGroup>
@@ -450,6 +458,11 @@
     <Content Include="Views\Home\DemoUser.cshtml" />
     <None Include="Properties\PublishProfiles\ZachBugTracker - Web Deploy.pubxml" />
     <Content Include="Views\Manage\EditProfile.cshtml" />
+    <Content Include="Uploads\applying-emailservice_637103767559309798.pdf" />
+    <Content Include="Uploads\assigning-roles-to-users_637093587120482435.pdf" />
+    <Content Include="Uploads\bugtracker-deliverables-week-2_637103777015159174.docx" />
+    <Content Include="Uploads\mvc-user-helper-classes-and-methods-for-role-and-project-management_637094086094931951.pdf" />
+    <Content Include="Uploads\mvc-user-helper-classes-and-methods-for-role-and-project-management_637099622885102139.pdf" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

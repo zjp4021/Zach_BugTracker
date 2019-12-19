@@ -8,6 +8,11 @@
     Layout = null;
 }
 
+<style>
+    custom-css{
+
+    }
+</style>
 
 <!--=====================================Beginning of Template Login Body==================================================================================-->
 
@@ -147,6 +152,18 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    <div class="login-keep-me">
+                                                        <label class="">
+                                                            @* Enable this once you have account confirmation enabled for password reset functionality*@
+                                                            <p>
+                                                                @Html.ActionLink("Forgot your password?", "ForgotPassword")
+                                                            </p>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -273,31 +290,37 @@
         </div>
         <!-- login End-->
         <!-- jquery
-        ============================================ -->
+    ============================================ -->
         <script src="~/Scripts/jquery-1.11.3.min.js"></script>
         <!-- bootstrap JS
-        ============================================ -->
+    ============================================ -->
         <script src="~/Scripts/bootstrap.min.js"></script>
         <!-- meanmenu JS
-        ============================================ -->
+    ============================================ -->
         <script src="~/Scripts/jquery.meanmenu.js"></script>
         <!-- mCustomScrollbar JS
-        ============================================ -->
+    ============================================ -->
         <script src="~/Scripts/jquery.mCustomScrollbar.concat.min.js"></script>
         <!-- sticky JS
-        ============================================ -->
+    ============================================ -->
         <script src="~/Scripts/jquery.sticky.js"></script>
         <!-- scrollUp JS
-        ============================================ -->
+    ============================================ -->
         <script src="~/Scripts/jquery.scrollUp.min.js"></script>
         <!-- form validate JS
-        ============================================ -->
+    ============================================ -->
         <script src="~/Scripts/jquery.form.min.js"></script>
         <script src="~/Scripts/jquery.validate.min.js"></script>
         <script src="~/Scripts/form-active.js"></script>
         <!-- main JS
-        ============================================ -->
+    ============================================ -->
         <script src="~/Scripts/main.js"></script>
+
+        <script>
+            if (performance.navigation.type == 2) {
+                location.reload(true);
+            }
+        </script>
 
 </body>
 
